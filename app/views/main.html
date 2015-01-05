@@ -1,23 +1,25 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="container">
+
+  <p><button ng-click="startCreatingTrack()" class="btn btn-success">+ Create Track</button>
+
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="track in tracks">
+      <a href="#">{{ track }}</a>
+    </li>
+  </ul>
+
+  <form ng-show="isCreatingTrack" class="well" ng-submit="addNewTrack(newTrack)">
+    <div class="form-group">
+      <label for="trackNameInput">Track Name</label>
+      <input ng-model="newTrack.name" type="text" class="form-control" id="trackNameInput" placeholder="Enter track name">
+    </div>
+    <div class="form-group">
+      <label for="trackDescInput">Track Description</label>
+      <input ng-model="newTrack.description" type="text" class="form-control" id="trackDescInput" placeholder="Enter description">
+    </div>
+    <button ng-click="cancelCreatingTrack()" type="submit" class="btn btn-info">Create</button>
+    <button class="btn btn-default" ng-click="cancelCreatingTrack()">Cancel</button>
+  </form>
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>

@@ -9,9 +9,20 @@
  */
 angular.module('angularjsKeeptrackApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    $scope.tracks = ['track1', 'track2', 'track3'];
+
+    $scope.isCreatingTrack = false;
+    $scope.startCreatingTrack = function() {
+      $scope.isCreatingTrack = true;
+    };
+    $scope.cancelCreatingTrack = function() {
+      $scope.isCreatingTrack = false;
+    };
+
+    $scope.addNewTrack = function (newTrack) {
+      $scope.tracks.push(newTrack.name);
+      newTrack.name = "";
+      newTrack.description = "";
+    };
+
   });
