@@ -8,9 +8,7 @@
  * Controller of the angularjsKeeptrackApp
  */
 angular.module('angularjsKeeptrackApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.tracks = ['track1', 'track2', 'track3'];
-
+  .controller('MainCtrl', function ($scope, $resource) {
     $scope.isCreatingTrack = false;
     $scope.startCreatingTrack = function() {
       $scope.isCreatingTrack = true;
@@ -19,10 +17,21 @@ angular.module('angularjsKeeptrackApp')
       $scope.isCreatingTrack = false;
     };
 
+    //Track resources
+    var TracksRes = $resource('http://api.mendlin.info/tracks/:id');
+    var tracks = TracksRes.query(function () {
+      //GET api.mendlin.info/tracks
+      console.log(tracks);
+      $scope.tracks = tracks;
+    });
+
     $scope.addNewTrack = function (newTrack) {
-      $scope.tracks.push(newTrack.name);
+      var track = new TracksRes(newTrack);
+      track.$save();
+
+      $scope.tracks.push(track);
+
       newTrack.name = "";
       newTrack.description = "";
     };
-
   });

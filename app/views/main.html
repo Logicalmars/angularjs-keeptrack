@@ -3,8 +3,8 @@
   <p><button ng-click="startCreatingTrack()" class="btn btn-success">+ Create Track</button>
 
   <ul class="list-group">
-    <a href="#" class="list-group-item" ng-repeat="track in tracks">
-      {{ track }}
+    <a href="/tracks/{{track.id}}" class="list-group-item" ng-repeat="track in tracks">
+      {{ track.name }} {{ track.description ? ' : ' + track.description : null}}
     </a>
   </ul>
 
