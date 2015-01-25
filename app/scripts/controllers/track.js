@@ -32,9 +32,7 @@ angular.module('angularjsKeeptrackApp')
         entry.timestamp = timestamp;
         entry.$save();
 
-        var entry_to_list = angular.copy(entry);
-
-        $scope.entries.push(entry_to_list);
+        $scope.entries.push(angular.copy(entry));
       }
 
       $scope.addEntry = function() {

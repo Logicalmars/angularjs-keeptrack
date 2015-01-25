@@ -33,7 +33,7 @@ angular.module('angularjsKeeptrackApp')
 
       $scope.tracks.push(track);
 
-      newTrack.name = "";
-      newTrack.description = "";
+      newTrack.name = '';
+      newTrack.description = '';
     };
   });

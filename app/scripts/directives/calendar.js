@@ -9,11 +9,11 @@
 angular.module('angularjsKeeptrackApp')
   .directive('calendar', function() {
     return {
-      restrict: "E",
-      templateUrl: "views/calendar.html",
+      restrict: 'E',
+      templateUrl: 'views/calendar.html',
       scope: {
-        selected: "=",
-        entries: "="
+        selected: '=',
+        entries: '='
       },
       link: function(scope) {
         //Only load the calendar when the entries data is ready.
@@ -67,7 +67,7 @@ angular.module('angularjsKeeptrackApp')
         var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
         while (!done) {
           scope.weeks.push({ days: _buildWeek(scope, date.clone(), month) });
-          date.add(1, "w");
+          date.add(1, 'w');
           done = count++ > 2 && monthIndex !== date.month();
           monthIndex = date.month();
         }
@@ -77,15 +77,15 @@ angular.module('angularjsKeeptrackApp')
         var days = [];
         for (var i = 0; i < 7; i++) {
           days.push({
-            name: date.format("dd").substring(0, 1),
+            name: date.format('dd').substring(0, 1),
             number: date.date(),
             isCurrentMonth: date.month() === month.month(),
-            isToday: date.isSame(new Date(), "day"),
+            isToday: date.isSame(new Date(), 'day'),
             isMarked: _isMarked(scope.dates, date),
             date: date
           });
           date = date.clone();
-          date.add(1, "d");
+          date.add(1, 'd');
         }
         return days;
       }
@@ -93,7 +93,7 @@ angular.module('angularjsKeeptrackApp')
       function _isMarked(dates, date) {
         var found = false;
         angular.forEach(dates, function(d) {
-          if (date.isSame(d, "day")) {
+          if (date.isSame(d, 'day')) {
             found = true;
           }
         });
