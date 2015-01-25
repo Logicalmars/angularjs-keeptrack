@@ -27,6 +27,11 @@ angular.module('angularjsKeeptrackApp')
         entry.timestamp = Date.now();
         entry.$save();
 
-        $scope.entries.push(angular.copy(entry));
+        var entry_to_list = angular.copy(entry);
+        entry_to_list.timestamp = entry.timestamp / 1000;
+
+        $scope.entries.push(entry_to_list);
       };
+
+      $scope.day = moment();
     }]);
