@@ -12,9 +12,23 @@ angular.module('angularjsKeeptrackApp')
       restrict: "E",
       templateUrl: "views/calendar.html",
       scope: {
-        selected: "="
+        selected: "=",
+        entries: "="
       },
       link: function(scope) {
+        //Only load the calendar when the entries data is ready.
+        scope.$watch('entries', function(entries) {
+          scope.dates = [];
+          angular.forEach(scope.entries, function(entry) {
+            scope.dates.push(new Date(entry.timestamp * 1000));
+          });
+
+          _renderCalendar(scope);
+        });
+      }
+      };
+
+      function _renderCalendar(scope) {
         scope.selected = _removeTime(scope.selected || moment());
         scope.month = scope.selected.clone();
 
@@ -42,7 +56,6 @@ angular.module('angularjsKeeptrackApp')
           _buildMonth(scope, previous, scope.month);
         };
       }
-      };
 
       function _removeTime(date) {
         return date.day(0).hour(0).minute(0).second(0).millisecond(0);
@@ -53,14 +66,14 @@ angular.module('angularjsKeeptrackApp')
 
         var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
         while (!done) {
-          scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+          scope.weeks.push({ days: _buildWeek(scope, date.clone(), month) });
           date.add(1, "w");
           done = count++ > 2 && monthIndex !== date.month();
           monthIndex = date.month();
         }
       }
 
-      function _buildWeek(date, month) {
+      function _buildWeek(scope, date, month) {
         var days = [];
         for (var i = 0; i < 7; i++) {
           days.push({
@@ -68,12 +81,23 @@ angular.module('angularjsKeeptrackApp')
             number: date.date(),
             isCurrentMonth: date.month() === month.month(),
             isToday: date.isSame(new Date(), "day"),
+            isMarked: _isMarked(scope.dates, date),
             date: date
           });
           date = date.clone();
           date.add(1, "d");
         }
         return days;
+      }
+
+      function _isMarked(dates, date) {
+        var found = false;
+        angular.forEach(dates, function(d) {
+          if (date.isSame(d, "day")) {
+            found = true;
+          }
+        });
+        return found;
       }
     });
 

@@ -1,15 +1,19 @@
 <div class="container">
+  <p> {{ track.name }} </p>
+  <p> {{track.description}} </p>
   <ul class="list-group" ng-show="entries.length>0">
-    <a class="list-group-item" href="#" ng-repeat="entry in entries | orderBy:'timestamp':true | limitTo:5">
+    <a class="list-group-item" href="#/tracks/{{track.id}}" ng-repeat="entry in entries | orderBy:'timestamp':true | limitTo:5">
       {{ entry.timestamp * 1000 | date:'MMM dd @ h:mma' }}
     </a>
+    <small>(only the newest 5 records are shown)</small>
   </ul>
 
   <p ng-show="!isLoaded"><img src="images/Preloader_1.gif" alt="Loading"></p>
 
   <p><button ng-click='addEntry()' class="btn btn-success">+ Add</button></p>
+  <p ng-show="isDebug"><button ng-click='addTestEntry()' class="btn btn-success">+ Add Test</button></p>
 
-  <calendar selected="day"></calendar>
+  <calendar entries="entries" selected="day"></calendar>
 </div>
 
 
