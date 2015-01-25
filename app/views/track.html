@@ -1,0 +1,11 @@
+<div class="container">
+  <ul class="list-group">
+    <a class="list-group-item" href="#" ng-repeat="entry in entries">
+      {{ entry.timestamp | date:'MMM dd @ h:mma' }}
+    </a>
+  </ul>
+
+  <p><button ng-click='addEntry()' class="btn btn-success">+ Add</button></p>
+</div>
+
+

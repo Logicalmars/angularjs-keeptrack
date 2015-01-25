@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/tracks/:trackId', {
+        templateUrl: 'views/track.html',
+        controller: 'TrackCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
