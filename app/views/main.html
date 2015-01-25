@@ -1,6 +1,7 @@
 <div class="container">
 
   <p><button ng-click="startCreatingTrack()" class="btn btn-success">+ Create Track</button>
+  <p ng-show="!isLoaded"><img src="images/Preloader_1.gif" alt="Loading"></p>
 
   <ul class="list-group">
     <a href="#/tracks/{{track.id}}" class="list-group-item" ng-repeat="track in tracks">

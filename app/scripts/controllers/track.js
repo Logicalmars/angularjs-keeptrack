@@ -11,6 +11,7 @@ angular.module('angularjsKeeptrackApp')
   .controller('TrackCtrl', ['$scope', '$routeParams', '$resource',
     function ($scope, $routeParams, $resource) {
       $scope.trackId = $routeParams.trackId;
+      $scope.isLoaded = false;
 
       var TracksRes = $resource('http://api.mendlin.info/tracks/:id?expand=entries');
       var trackInfo = TracksRes.get({id: $scope.trackId}, function () {
@@ -18,6 +19,7 @@ angular.module('angularjsKeeptrackApp')
         console.log(trackInfo);
         $scope.track = trackInfo;
         $scope.entries = trackInfo.entries;
+        $scope.isLoaded = true;
       });
 
       var EntryRes = $resource('http://api.mendlin.info/entries/:id');

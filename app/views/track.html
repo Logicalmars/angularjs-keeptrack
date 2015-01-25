@@ -1,9 +1,11 @@
 <div class="container">
-  <ul class="list-group">
+  <ul class="list-group" ng-show="entries.length>0">
     <a class="list-group-item" href="#" ng-repeat="entry in entries | orderBy:'timestamp':true | limitTo:5">
       {{ entry.timestamp * 1000 | date:'MMM dd @ h:mma' }}
     </a>
   </ul>
+
+  <p ng-show="!isLoaded"><img src="images/Preloader_1.gif" alt="Loading"></p>
 
   <p><button ng-click='addEntry()' class="btn btn-success">+ Add</button></p>
 

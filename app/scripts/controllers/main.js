@@ -16,6 +16,7 @@ angular.module('angularjsKeeptrackApp')
     $scope.cancelCreatingTrack = function() {
       $scope.isCreatingTrack = false;
     };
+    $scope.isLoaded = false;
 
     //Track resources
     var TracksRes = $resource('http://api.mendlin.info/tracks/:id');
@@ -23,6 +24,7 @@ angular.module('angularjsKeeptrackApp')
       //GET api.mendlin.info/tracks
       console.log(tracks);
       $scope.tracks = tracks;
+      $scope.isLoaded = true;
     });
 
     $scope.addNewTrack = function (newTrack) {
